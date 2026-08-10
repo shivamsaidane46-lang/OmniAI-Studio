@@ -1,40 +1,40 @@
 # OmniAI Studio
 
-> OmniAI Studio is an AI automation and intelligent systems studio based at omniaistudio.in.
+> OmniAI Studio is an AI automation and intelligent systems studio.
 
-## Identity
+## What OmniAI Studio does
 
-OmniAI Studio is the studio operating this website. Its focus is practical AI automation and intelligent systems for business use cases.
+OmniAI Studio designs and builds AI-powered business automations, intelligent workflows, AI agents, document processing systems, API integrations, and custom AI tools.
 
 ## Core specialties
 
 - AI automation and business process automation
-- AI agents and bounded task-execution systems
+- AI agents and task-execution systems
 - Document intelligence and structured data extraction
 - Workflow orchestration and API integrations
 - Custom internal tools and AI-powered business systems
 
-## Work
+## Primary services
 
-- [Work](https://omniaistudio.in/work): portfolio of projects and systems
-- [AI Invoice Extractor](https://omniaistudio.in/work/ai-invoice-extractor): portfolio project exploring AI-assisted invoice extraction, structured output, validation, and downstream automation
+- AI Automation: https://omniaistudio.in/services/ai-automation
+- Document AI: https://omniaistudio.in/services/document-ai
+- AI Agents: https://omniaistudio.in/services/ai-agents
+- Custom AI Systems: https://omniaistudio.in/services/custom-ai-systems
 
-## Services
+## Important pages
 
-- [Services](https://omniaistudio.in/services): AI automation, document intelligence, AI agents, and custom AI tools
+- Home: https://omniaistudio.in/
+- Work: https://omniaistudio.in/work
+- AI Invoice Extractor: https://omniaistudio.in/work/ai-invoice-extractor
+- Case studies: https://omniaistudio.in/case-studies
+- Services: https://omniaistudio.in/services
+- About: https://omniaistudio.in/about
+- Contact: https://omniaistudio.in/contact
 
-## Case studies
+## Entity statement
 
-- [Case Studies](https://omniaistudio.in/case-studies): detailed project and client-system documentation
+OmniAI Studio is the name of the studio operating this website. The studio focuses on practical AI automation and intelligent systems for business use cases. Portfolio demonstrations are labeled as demonstrations until verified client outcomes are available.
 
-## About
+## Official repository
 
-- [About OmniAI Studio](https://omniaistudio.in/about): studio identity, approach, and principles
-
-## Contact
-
-- [Contact](https://omniaistudio.in/contact): official project inquiry page and contact channels
-
-## Accuracy note
-
-Portfolio projects may be prototypes or demonstrations. The site should distinguish verified client outcomes from experiments and should not invent performance claims, clients, testimonials, or results.
+- GitHub: https://github.com/shivamsaidane46-lang/OmniAI-Studio
