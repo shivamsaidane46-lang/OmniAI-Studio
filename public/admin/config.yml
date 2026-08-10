@@ -1,15 +1,15 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: shivamsaidane46-lang/OmniAI-Studio
   branch: main
 
 site_url: https://omniaistudio.in
-publish_mode: editorial_workflow
 media_folder: public/uploads
 public_folder: /uploads
 
 collections:
   - name: projects
-    label: Projects
+    label: Projects & Workflows
     folder: src/content/projects
     create: true
     slug: '{{slug}}'
@@ -30,7 +30,7 @@ collections:
   - name: site
     label: Site Settings
     files:
-      - label: General
+      - label: General Contact & Brand
         name: general
         file: src/content/site/general.md
         fields:
