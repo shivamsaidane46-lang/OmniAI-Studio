@@ -1,39 +1,39 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const serviceData = [
-  {
-    slug: 'ai-automation',
-    title: 'AI Automation',
-    eyebrow: 'SERVICE · AI AUTOMATION',
-    description: 'Design and build workflows that connect business processes, APIs, data, and AI into reliable automation.',
-    points: ['Lead intake and qualification', 'Data enrichment and routing', 'Email and notification workflows', 'CRM and spreadsheet automation', 'API orchestration and webhooks']
-  },
-  {
-    slug: 'document-ai',
-    title: 'Document AI',
-    eyebrow: 'SERVICE · DOCUMENT INTELLIGENCE',
-    description: 'Turn invoices, forms, PDFs, and other variable documents into structured, validated information.',
-    points: ['Invoice and receipt extraction', 'Form and PDF processing', 'Field and line-item extraction', 'Schema validation and confidence checks', 'Human review for uncertain documents']
-  },
-  {
-    slug: 'ai-agents',
-    title: 'AI Agents',
-    eyebrow: 'SERVICE · AI AGENTS',
-    description: 'Build task-focused AI systems that can retrieve information, reason over context, and execute defined actions.',
-    points: ['Knowledge retrieval', 'Task planning and tool use', 'Customer or internal assistants', 'Approval and human-in-the-loop flows', 'Guardrails and action validation']
-  },
-  {
-    slug: 'custom-ai-systems',
-    title: 'Custom AI Systems',
-    eyebrow: 'SERVICE · CUSTOM SYSTEMS',
-    description: 'Create focused AI-powered internal tools, assistants, dashboards, and integrations around a specific operational requirement.',
-    points: ['Internal AI tools', 'Custom dashboards', 'AI-powered data workflows', 'System integrations', 'Prototype-to-production architecture']
-  }
-];
-
 export function getStaticPaths() {
-  return serviceData.map((service) => ({
+  const services = [
+    {
+      slug: 'ai-automation',
+      title: 'AI Automation',
+      eyebrow: 'SERVICE · AI AUTOMATION',
+      description: 'Design and build workflows that connect business processes, APIs, data, and AI into reliable automation.',
+      points: ['Lead intake and qualification', 'Data enrichment and routing', 'Email and notification workflows', 'CRM and spreadsheet automation', 'API orchestration and webhooks']
+    },
+    {
+      slug: 'document-ai',
+      title: 'Document AI',
+      eyebrow: 'SERVICE · DOCUMENT INTELLIGENCE',
+      description: 'Turn invoices, forms, PDFs, and other variable documents into structured, validated information.',
+      points: ['Invoice and receipt extraction', 'Form and PDF processing', 'Field and line-item extraction', 'Schema validation and confidence checks', 'Human review for uncertain documents']
+    },
+    {
+      slug: 'ai-agents',
+      title: 'AI Agents',
+      eyebrow: 'SERVICE · AI AGENTS',
+      description: 'Build task-focused AI systems that can retrieve information, reason over context, and execute defined actions.',
+      points: ['Knowledge retrieval', 'Task planning and tool use', 'Customer or internal assistants', 'Approval and human-in-the-loop flows', 'Guardrails and action validation']
+    },
+    {
+      slug: 'custom-ai-systems',
+      title: 'Custom AI Systems',
+      eyebrow: 'SERVICE · CUSTOM SYSTEMS',
+      description: 'Create focused AI-powered internal tools, assistants, dashboards, and integrations around a specific operational requirement.',
+      points: ['Internal AI tools', 'Custom dashboards', 'AI-powered data workflows', 'System integrations', 'Prototype-to-production architecture']
+    }
+  ];
+
+  return services.map((service) => ({
     params: { slug: service.slug },
     props: { service }
   }));
