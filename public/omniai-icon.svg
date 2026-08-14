@@ -1,10 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">OmniAI Studio icon</title>
   <defs>
-    <linearGradient id="ring" x1="15%" y1="10%" x2="90%" y2="90%"><stop offset="0" stop-color="#16d9ff"/><stop offset="55%" stop-color="#2789ff"/><stop offset="100%" stop-color="#a13dff"/></linearGradient>
-    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="55%" stop-color="#d8dbe0"/><stop offset="100%" stop-color="#7f8793"/></linearGradient>
+    <linearGradient id="ai" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#18dcff"/><stop offset="55%" stop-color="#2388ff"/><stop offset="100%" stop-color="#7357ff"/></linearGradient>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff"/><stop offset="55%" stop-color="#d6dbe2"/><stop offset="100%" stop-color="#8993a2"/></linearGradient>
   </defs>
-  <rect width="512" height="512" rx="92" fill="#07090f"/>
-  <path d="M400 246c8-29 0-61-22-83-22-22-54-30-83-22-21-21-52-30-82-22-31 8-53 32-61 62-29 8-53 32-61 62-8 31 1 61 22 82-8 29 0 61 22 83 22 22 54 30 83 22 21 21 52 30 82 22 31-8 53-32 61-62 29-8 53-32 61-62 8-31-1-61-22-82z" fill="none" stroke="url(#ring)" stroke-width="27" stroke-linecap="round"/>
-  <path d="M311 100 172 318h71l68-97 68 97h70L311 100z" fill="url(#metal)"/>
-  <path d="m311 210 8 20 20 8-20 8-8 20-8-20-20-8 20-8 8-20z" fill="#7c5cff"/>
+  <rect width="512" height="512" rx="96" fill="#07090f"/>
+  <path d="M108 286 C76 219 93 151 151 111 C209 71 284 79 331 126" fill="none" stroke="url(#ai)" stroke-width="30" stroke-linecap="round"/>
+  <path d="M331 126 L198 395" fill="none" stroke="url(#silver)" stroke-width="30" stroke-linecap="round"/>
+  <path d="M198 395 L270 260 L344 395" fill="none" stroke="url(#ai)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M331 126 C387 172 399 241 368 300" fill="none" stroke="url(#ai)" stroke-width="30" stroke-linecap="round"/>
 </svg>
