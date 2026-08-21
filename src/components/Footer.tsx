@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { GithubIcon, LinkedinIcon, XTwitterIcon } from "./icons";
+import { GithubIcon, LinkedinIcon } from "./icons";
 
 const footerLinks = [
   { href: "/", label: "Home" },
@@ -11,9 +11,16 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://github.com", icon: GithubIcon, label: "GitHub" },
-  { href: "https://linkedin.com", icon: LinkedinIcon, label: "LinkedIn" },
-  { href: "https://twitter.com", icon: XTwitterIcon, label: "X (Twitter)" },
+  {
+    href: "https://github.com/shivamsaidane46-lang",
+    icon: GithubIcon,
+    label: "GitHub",
+  },
+  {
+    href: "https://in.linkedin.com/in/shivam-saidane-594217242",
+    icon: LinkedinIcon,
+    label: "LinkedIn",
+  },
 ];
 
 export function Footer() {
