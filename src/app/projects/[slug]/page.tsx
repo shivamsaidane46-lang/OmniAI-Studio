@@ -20,7 +20,7 @@ export function generateStaticParams() {
   }));
 }
 
-// Generate metadata for each project
+// Generate search-friendly metadata for each project
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -28,12 +28,29 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   if (!project) {
     return {
       title: "Project Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
+  const canonical = `/projects/${project.slug}`;
+
   return {
-    title: `${project.title} — OmniAI Studio`,
+    title: project.title,
     description: project.description,
+    alternates: { canonical },
+    keywords: [
+      ...project.technologies,
+      project.category,
+      "AI automation",
+      "n8n workflow",
+    ],
+    openGraph: {
+      type: "article" as const,
+      url: canonical,
+      title: `${project.title} | OmniAI Studio`,
+      description: project.description,
+      siteName: "OmniAI Studio",
+    },
   };
 }
 
