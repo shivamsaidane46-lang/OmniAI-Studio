@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "./icons";
 
 const navLinks = [
@@ -62,9 +62,10 @@ export function Navbar() {
           </a>
           <Link
             href="/#contact"
-            className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]"
           >
             Work With Me
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
 
           {/* Mobile Toggle */}
@@ -105,9 +106,10 @@ export function Navbar() {
               <Link
                 href="/#contact"
                 onClick={() => setMobileOpen(false)}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-semibold rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-all"
               >
                 Work With Me
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </div>
