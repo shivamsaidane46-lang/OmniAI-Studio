@@ -34,9 +34,10 @@ export function HeroSection() {
             </h1>
 
             <p className="mt-6 text-lg text-text-secondary leading-relaxed max-w-xl">
-              I design and build end-to-end AI automations, n8n workflows, and
-              intelligent agents that save time, reduce manual work, and help
-              businesses scale.
+              OmniAI Studio is an India-based AI automation studio building
+              end-to-end AI automations, n8n workflows, intelligent agents,
+              and API integrations that save time, reduce manual work, and
+              help businesses scale.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -56,7 +57,7 @@ export function HeroSection() {
             </div>
 
             {/* Tech Badges */}
-            <div className="mt-10 flex flex-wrap gap-2">
+            <div className="mt-10 flex flex-wrap gap-2" aria-label="Technologies used">
               {techBadges.map((tech) => (
                 <span
                   key={tech}
@@ -69,7 +70,7 @@ export function HeroSection() {
           </div>
 
           {/* Right — Workflow Diagram */}
-          <div className="hidden lg:block animate-fade-in">
+          <div className="hidden lg:block animate-fade-in" aria-hidden="true">
             <WorkflowDiagram />
           </div>
         </div>
