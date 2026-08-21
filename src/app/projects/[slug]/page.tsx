@@ -3,20 +3,33 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { getProjectBySlug, getProjects } from "@/lib/data";
+import type { ReactNode } from "react";
+
+type ProjectPageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
 
 // Generate static params for all projects
 export function generateStaticParams() {
   const projects = getProjects();
+
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
 // Generate metadata for each project
-export async function generateMetadata({ params }: PageProps<"/projects/[slug]">) {
+export async function generateMetadata({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project) return { title: "Project Not Found" };
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
 
   return {
     title: `${project.title} — OmniAI Studio`,
@@ -24,7 +37,9 @@ export async function generateMetadata({ params }: PageProps<"/projects/[slug]">
   };
 }
 
-export default async function ProjectDetailPage({ params }: PageProps<"/projects/[slug]">) {
+export default async function ProjectDetailPage({
+  params,
+}: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
@@ -35,6 +50,7 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
   return (
     <div className="pt-24 pb-16">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
         {/* Back link */}
         <Link
           href="/projects"
@@ -73,6 +89,7 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
                 View Source
               </a>
             )}
+
             {project.demoUrl && project.demoUrl !== "#" && (
               <a
                 href={project.demoUrl}
@@ -90,19 +107,60 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
         {/* Hero image placeholder */}
         <div className="relative rounded-2xl border border-border-custom bg-surface-elevated overflow-hidden mb-12 h-64 sm:h-80 flex items-center justify-center">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.06),transparent_70%)]" />
+
           <div className="relative text-center">
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" className="mx-auto mb-3 opacity-40">
-              <rect x="10" y="10" width="60" height="60" rx="14" stroke="#8b5cf6" strokeWidth="1.5" />
-              <rect x="20" y="20" width="40" height="40" rx="8" fill="#8b5cf6" opacity="0.1" />
-              <circle cx="40" cy="35" r="8" fill="#8b5cf6" opacity="0.25" />
-              <rect x="28" y="48" width="24" height="3" rx="1.5" fill="#8b5cf6" opacity="0.2" />
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 80 80"
+              fill="none"
+              className="mx-auto mb-3 opacity-40"
+            >
+              <rect
+                x="10"
+                y="10"
+                width="60"
+                height="60"
+                rx="14"
+                stroke="#8b5cf6"
+                strokeWidth="1.5"
+              />
+              <rect
+                x="20"
+                y="20"
+                width="40"
+                height="40"
+                rx="8"
+                fill="#8b5cf6"
+                opacity="0.1"
+              />
+              <circle
+                cx="40"
+                cy="35"
+                r="8"
+                fill="#8b5cf6"
+                opacity="0.25"
+              />
+              <rect
+                x="28"
+                y="48"
+                width="24"
+                height="3"
+                rx="1.5"
+                fill="#8b5cf6"
+                opacity="0.2"
+              />
             </svg>
-            <p className="text-xs text-text-secondary/60">Project preview</p>
+
+            <p className="text-xs text-text-secondary/60">
+              Project preview
+            </p>
           </div>
         </div>
 
         {/* Content sections */}
         <div className="space-y-10">
+
           {/* Problem */}
           {project.problem && (
             <ContentSection title="The Problem">
@@ -146,6 +204,7 @@ export default async function ProjectDetailPage({ params }: PageProps<"/projects
             Back to all projects
           </Link>
         </div>
+
       </div>
     </div>
   );
@@ -156,7 +215,7 @@ function ContentSection({
   children,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div>
@@ -164,6 +223,7 @@ function ContentSection({
         <div className="h-1 w-6 rounded-full bg-purple-600" />
         {title}
       </h2>
+
       {children}
     </div>
   );
