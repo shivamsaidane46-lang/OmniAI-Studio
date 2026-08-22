@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, Download, Play } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { getProjectBySlug, getProjects } from "@/lib/data";
 import type { ReactNode } from "react";
@@ -46,6 +46,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const heroImage = typeof project.heroImage === "string" ? project.heroImage : project.thumbnail;
   const workflowImage = typeof project.workflowImage === "string" ? project.workflowImage : heroImage;
   const jsonFile = typeof project.jsonFile === "string" ? project.jsonFile : null;
+  const demoUrl = typeof project.demoUrl === "string" && project.demoUrl !== "#" ? project.demoUrl : null;
   const day = typeof project.day === "string" ? project.day : null;
   const overview = typeof project.overview === "string" ? project.overview : null;
   const workflowSteps = Array.isArray(project.workflowSteps)
@@ -118,6 +119,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               <Image src={workflowImage} alt="AI Invoice Extractor n8n workflow architecture" width={1600} height={900} className="h-auto w-full" />
             </div>
           </ContentSection>
+
+          {demoUrl && (
+            <ContentSection title="Demo">
+              <div className="overflow-hidden rounded-2xl border border-border-custom bg-black">
+                <video controls preload="metadata" className="h-auto w-full" src={demoUrl}>
+                  Your browser does not support the video element.
+                </video>
+              </div>
+            </ContentSection>
+          )}
 
           {keyFeatures.length > 0 && (
             <ContentSection title="Key Features">
