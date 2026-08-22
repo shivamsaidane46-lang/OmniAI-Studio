@@ -1,0 +1,150 @@
+{
+  "name": "Invoice Extractor",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoice-upload",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "62d46998-3a69-4bd0-b80d-3edf9f54811c",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-1472, 80]
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "invoice",
+        "options": {}
+      },
+      "id": "02b6eb9e-f056-48c6-8cfd-91b9064f73da",
+      "name": "Extract Text from PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [-1248, 80]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "713a0531-31a6-402d-ab83-9fb9fb94e21d",
+              "name": "systemPrompt",
+              "type": "string",
+              "value": "Extract the invoice from the provided PDF text.\n\nReturn ONLY valid JSON. No markdown. No explanation.\n\n{\n  \"supplier_name\": null,\n  \"invoice_number\": null,\n  \"invoice_date\": null,\n  \"due_date\": null,\n  \"subtotal\": null,\n  \"tax_amount\": null,\n  \"total_amount\": null,\n  \"line_items\": [\n    {\n      \"description\": null,\n      \"quantity\": null,\n      \"unit_price\": null,\n      \"amount\": null\n    }\n  ]\n}\n\nRules:\n\n- Extract ONLY information explicitly present in the invoice.\n- NEVER guess or invent missing values.\n- If a field is missing, return null.\n- invoice_date and due_date are separate fields.\n- Extract the actual Due Date when one is shown.\n- Extract every line item shown in the invoice.\n- Extract the quantity, unit price, and amount for every line item.\n- Extract the printed subtotal, tax amount, and total exactly as shown.\n- Do NOT calculate or repair values.\n- If the invoice contains inconsistent numbers, preserve the numbers shown and let the validation step detect the inconsistency.\n- Return JSON only."
+            },
+            {
+              "id": "5724aac1-2b0c-4be1-b40c-b6266095c0ae",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4a431769-fcc2-463a-8623-c465987417a8",
+      "name": "Build Prompt",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-1024, 80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.item.json;\n\nlet rawContent = item.text || '';\n\nlet cleanedText = String(rawContent)\n  .replace(/```json/gi, '')\n  .replace(/```/g, '')\n  .trim();\n\nconst jsonMatch = cleanedText.match(/\\{[\\s\\S]*\\}/);\n\nif (jsonMatch) cleanedText = jsonMatch[0];\n\nfunction toNumber(value) {\n  if (value === null || value === undefined || value === '') return null;\n  if (typeof value === 'number') return Number.isFinite(value) ? value : null;\n  const cleaned = String(value).replace(/[^0-9.-]/g, '');\n  if (!cleaned || cleaned === '-') return null;\n  const number = parseFloat(cleaned);\n  return Number.isFinite(number) ? number : null;\n}\n\nfunction cleanString(value) {\n  if (value === null || value === undefined) return null;\n  const valueString = String(value).trim();\n  return valueString === '' ? null : valueString;\n}\n\nfunction matches(a, b) {\n  if (a === null || b === null) return false;\n  return Math.abs(a - b) <= 0.02;\n}\n\nlet parsed = {};\nlet parseError = null;\ntry { parsed = JSON.parse(cleanedText); } catch (e) { parseError = e.message; }\n\nconst cleaned = {\n  supplier_name: cleanString(parsed.supplier_name),\n  invoice_number: cleanString(parsed.invoice_number),\n  invoice_date: cleanString(parsed.invoice_date),\n  due_date: cleanString(parsed.due_date),\n  subtotal: toNumber(parsed.subtotal),\n  tax_amount: toNumber(parsed.tax_amount),\n  total_amount: toNumber(parsed.total_amount),\n  line_items: Array.isArray(parsed.line_items) ? parsed.line_items.map(line => ({\n    description: cleanString(line.description),\n    quantity: toNumber(line.quantity),\n    unit_price: toNumber(line.unit_price),\n    amount: toNumber(line.amount)\n  })) : []\n};\n\nconst errors = [];\nif (parseError) errors.push('Invalid JSON returned by AI');\nif (!cleaned.supplier_name) errors.push('Missing supplier name');\nif (!cleaned.invoice_number) errors.push('Missing invoice number');\nif (!cleaned.invoice_date) errors.push('Missing invoice date');\nif (!cleaned.due_date) errors.push('Missing due date');\nif (cleaned.subtotal === null) errors.push('Missing subtotal');\nif (cleaned.tax_amount === null) errors.push('Missing tax amount');\nif (cleaned.total_amount === null) errors.push('Missing total amount');\n\nif (!cleaned.line_items.length) {\n  errors.push('No line items found');\n} else {\n  cleaned.line_items.forEach((line, index) => {\n    const n = index + 1;\n    if (!line.description) errors.push(`Line ${n}: missing description`);\n    if (line.quantity === null) errors.push(`Line ${n}: missing quantity`);\n    if (line.unit_price === null) errors.push(`Line ${n}: missing unit price`);\n    if (line.amount === null) errors.push(`Line ${n}: missing amount`);\n    if (line.quantity !== null && line.unit_price !== null && line.amount !== null) {\n      const expected = line.quantity * line.unit_price;\n      if (!matches(expected, line.amount)) errors.push(`Line ${n}: quantity × unit price does not equal amount`);\n    }\n  });\n}\n\nif (cleaned.line_items.length > 0 && cleaned.line_items.every(line => line.amount !== null) && cleaned.subtotal !== null) {\n  const calculatedSubtotal = cleaned.line_items.reduce((sum, line) => sum + line.amount, 0);\n  if (!matches(calculatedSubtotal, cleaned.subtotal)) errors.push('Subtotal does not match line items');\n}\n\nif (cleaned.subtotal !== null && cleaned.tax_amount !== null && cleaned.total_amount !== null) {\n  const calculatedTotal = cleaned.subtotal + cleaned.tax_amount;\n  if (!matches(calculatedTotal, cleaned.total_amount)) errors.push('Subtotal + tax does not equal total');\n}\n\nlet sourceFilename = 'unknown';\ntry {\n  const binary = $('Webhook Trigger').first().binary;\n  const key = Object.keys(binary || {})[0];\n  if (key && binary[key].fileName) sourceFilename = binary[key].fileName;\n} catch (e) {}\n\nreturn [{ json: { ...cleaned, source_filename: sourceFilename, processed_at: new Date().toISOString(), valid: !parseError && errors.length === 0, error_reason: errors.length ? errors.join('; ') : null, validation_errors: errors, raw_ai_response: rawContent } }];"
+      },
+      "id": "5b6941db-a1f4-4d42-98ff-0b087b4a68db",
+      "name": "Clean & Validate Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-448, 80]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true,"leftValue": "","typeValidation": "strict","version": 2},
+          "conditions": [{"id": "b674a597-7eae-449b-8d91-731c886e6ff1","leftValue": "={{ $json.valid }}","rightValue": true,"operator": {"type": "boolean","operation": "true","singleValue": true}}],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "8e42e6f0-86f0-4d1e-8d0c-0f95e6779f13",
+      "name": "Is Data Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [-224, 80]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {"__rl": true,"value": "1zemmx7Hd66hFTFRIaLshxynjhkRyawaPZoKq3sg5naU","mode": "list","cachedResultName": "Invoice Logged","cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"},
+        "sheetName": {"__rl": true,"value": "gid=0","mode": "list","cachedResultName": "Sheet1","cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID/edit"},
+        "columns": {"mappingMode": "defineBelow","value": {"Invoice Number": "={{ $json.invoice_number }}","Vendor Name": "={{ $json.supplier_name }}","Total Amount": "={{ $json.total_amount }}","Tax Amount": "={{ $json.tax_amount }}","Due Date": "={{ $json.due_date }}","Validation Status": "={{ $json.valid }}","Invoice Date": "={{$json.invoice_date}}"},"matchingColumns": [],"schema": [],"attemptToConvertTypes": false,"convertFieldsToString": false},
+        "options": {}
+      },
+      "id": "2dce12ef-53a3-486a-9830-f263d9d817a9",
+      "name": "Append to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [0, -16]
+    },
+    {
+      "parameters": {"respondWith": "json","responseBody": "={{ { \"success\": true, \"message\": \"Invoice processed and logged.\", \"data\": $json } }}","options": {"responseCode": 200}},
+      "id": "cb1346a4-5e6a-4a58-b4e3-34fa3739a875",
+      "name": "Respond - Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [224, -16]
+    },
+    {
+      "parameters": {"respondWith": "json","responseBody": "={{ { \"success\": false, \"message\": \"Could not confidently extract all required fields. Please review manually.\", \"reason\": $json.error_reason, \"raw_ai_response\": $json.raw_ai_response } }}","options": {"responseCode": 422}},
+      "id": "20d113a9-cac0-4be3-b4ca-c38abd389643",
+      "name": "Respond - Needs Review",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [0, 176]
+    },
+    {
+      "parameters": {"content": "## Invoice Extraction Pipeline\n\n**Before running:**\n1. Configure your OpenRouter credential on the AI node.\n2. Configure your Google Sheets credential, spreadsheet ID, and sheet/tab name.\n3. Use the Webhook Production URL from the Webhook Trigger node.\n4. This pipeline only reads text-based PDFs. Scanned/photographed invoices need a vision-capable model step instead.","height": 300,"width": 460},
+      "id": "c847eee4-b063-45a8-acba-7c35f497de33",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-1456, 384]
+    },
+    {
+      "parameters": {"promptType": "define","text": "=You are a strict invoice data extraction tool.\n\nRead the invoice text below and extract these fields:\n\n- supplier_name\n- invoice_number\n- invoice_date\n- due_date\n- subtotal\n- tax_amount\n- total_amount\n- line_items\n\nRules:\n1. Return ONLY valid JSON.\n2. Do not use markdown.\n3. Do not add explanations.\n4. If a field cannot be found, return null.\n5. line_items must be an array. If no line items can be found, return [].\n6. Do not invent or calculate missing invoice information.\n7. Preserve the values exactly as shown when possible.\n8. For monetary values, return numbers without currency symbols or commas.\n\nInvoice text:\n\n{{ $json.text }}","batching": {}},
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [-800, 80],
+      "id": "44b51b58-fd5c-40ca-bb8d-7509296db6ab",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {"model": "nvidia/nemotron-3-nano-30b-a3b:free","options": {}},
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [-736, 320],
+      "id": "d02bda24-d001-44f3-91cb-f7f5544d0988",
+      "name": "OpenRouter Chat Model"
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {"main": [[{"node": "Extract Text from PDF","type": "main","index": 0}]]},
+    "Extract Text from PDF": {"main": [[{"node": "Build Prompt","type": "main","index": 0}]]},
+    "Build Prompt": {"main": [[{"node": "Basic LLM Chain","type": "main","index": 0}]]},
+    "Clean & Validate Data": {"main": [[{"node": "Is Data Valid?","type": "main","index": 0}]]},
+    "Is Data Valid?": {"main": [[{"node": "Append to Google Sheet","type": "main","index": 0}],[{"node": "Respond - Needs Review","type": "main","index": 0}]]},
+    "Append to Google Sheet": {"main": [[{"node": "Respond - Success","type": "main","index": 0}]]},
+    "OpenRouter Chat Model": {"ai_languageModel": [[{"node": "Basic LLM Chain","type": "ai_languageModel","index": 0}]]},
+    "Basic LLM Chain": {"main": [[{"node": "Clean & Validate Data","type": "main","index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1","binaryMode": "separate","availableInMCP": true,"timeSavedMode": "fixed"},
+  "nodeGroups": [],
+  "tags": []
+}
