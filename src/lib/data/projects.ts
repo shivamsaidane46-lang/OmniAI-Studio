@@ -5,19 +5,45 @@ export const projects: Project[] = [
     id: "1",
     title: "AI Invoice Extractor",
     slug: "ai-invoice-extractor",
+    day: "Day 1 / 30",
     description:
-      "Automated invoice data extraction pipeline that reads PDF invoices, extracts key fields using AI, and populates Google Sheets for bookkeeping.",
+      "A webhook-driven AI pipeline that turns PDF invoices into structured, validated records and logs clean results to Google Sheets.",
     category: "AI Automation",
     featured: true,
-    thumbnail: "/projects/invoice-extractor.svg",
+    thumbnail: "/projects/ai-invoice-extractor-workflow.svg",
+    heroImage: "/projects/ai-invoice-extractor-workflow.svg",
+    workflowImage: "/projects/ai-invoice-extractor-workflow.svg",
+    jsonFile: "/projects/ai-invoice-extractor.json",
     problem:
-      "Small businesses spend hours manually entering invoice data into spreadsheets. The process is error-prone and doesn't scale as the volume of invoices grows.",
+      "Invoice processing is repetitive and easy to get wrong. Manually copying vendor details, dates, totals and line items into a spreadsheet creates unnecessary work and makes arithmetic or transcription errors harder to catch.",
     solution:
-      "An automated pipeline that watches a Gmail inbox for incoming invoices, extracts key fields (vendor, amount, date, line items) using an AI model, validates the data, and writes clean rows to Google Sheets — all without human intervention.",
-    technologies: ["n8n", "OpenAI", "Google Sheets", "Gmail", "PDF Parser"],
+      "The workflow accepts a PDF through a webhook, extracts its text, uses an OpenRouter-backed LLM to produce structured invoice data, then validates required fields and invoice arithmetic before routing the result. Valid records are appended to Google Sheets; inconsistent or incomplete invoices are returned for manual review instead of being silently accepted.",
+    overview:
+      "Day 1 focuses on building a reliable extraction pipeline rather than simply asking an AI model to read a document. The important part is the validation layer: the workflow checks required fields, line-item math, subtotal reconciliation, and subtotal + tax = total before writing data to the spreadsheet.",
+    workflowSteps: [
+      "Receive an invoice PDF through a POST webhook.",
+      "Extract text from the uploaded PDF.",
+      "Send the invoice text to the LLM with a strict JSON schema and no-guessing rules.",
+      "Normalize values and validate required fields and invoice arithmetic.",
+      "Route valid data to Google Sheets or return a manual-review response with the validation reason."
+    ],
+    keyFeatures: [
+      "Structured JSON extraction",
+      "Required-field validation",
+      "Line-item quantity × unit-price checks",
+      "Subtotal and total reconciliation",
+      "Google Sheets logging",
+      "Manual-review fallback"
+    ],
+    limitations: [
+      "Designed for text-based PDF invoices.",
+      "Scanned or photographed invoices need a vision-capable extraction step.",
+      "Credentials and production webhook configuration are intentionally excluded from the public JSON."
+    ],
+    technologies: ["n8n", "OpenRouter", "Google Sheets", "Webhooks", "PDF Parser"],
     githubUrl: "#",
     demoUrl: "#",
-    screenshots: [],
+    screenshots: ["/projects/ai-invoice-extractor-workflow.svg"],
   },
   {
     id: "2",
@@ -49,7 +75,7 @@ export const projects: Project[] = [
     problem:
       "Creating consistent social media content across platforms is time-consuming. Entrepreneurs and small teams struggle to maintain a regular posting schedule.",
     solution:
-      "An AI agent that takes a content brief or topic, generates platform-specific posts (LinkedIn, Twitter/X, Instagram captions), schedules them, and tracks engagement metrics in a central dashboard.",
+      "An AI agent that takes a content brief or topic, generates platform-specific posts, schedules them, and tracks engagement metrics in a central dashboard.",
     technologies: ["n8n", "OpenAI", "Buffer API", "Google Sheets", "Airtable"],
     githubUrl: "#",
     demoUrl: "#",
@@ -65,9 +91,9 @@ export const projects: Project[] = [
     featured: true,
     thumbnail: "/projects/email-responder.svg",
     problem:
-      "Professionals spend 2-3 hours daily managing email. Most replies follow predictable patterns, yet manual effort is required for every single message.",
+      "Professionals spend hours managing email. Many replies follow predictable patterns, yet manual effort is still required for each message.",
     solution:
-      "A smart email workflow that monitors your inbox, classifies messages by intent and urgency, drafts context-aware replies using AI, and puts them in your drafts folder for one-click sending. Urgent items trigger Slack notifications.",
+      "A smart email workflow that monitors an inbox, classifies messages by intent and urgency, drafts context-aware replies using AI, and escalates urgent items.",
     technologies: ["n8n", "OpenAI", "Gmail", "Slack", "Google Sheets"],
     githubUrl: "#",
     demoUrl: "#",
