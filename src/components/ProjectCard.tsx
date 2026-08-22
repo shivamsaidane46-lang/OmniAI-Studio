@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Project } from "@/lib/types";
 
@@ -9,14 +10,23 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, showFeaturedBadge = false }: ProjectCardProps) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="card group block overflow-hidden"
-    >
+    <Link href={`/projects/${project.slug}`} className="card group block overflow-hidden">
       {/* Thumbnail area */}
-      <div className="relative h-48 bg-surface-elevated flex items-center justify-center overflow-hidden">
+      <div className="relative h-48 bg-surface-elevated overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.08),transparent_70%)]" />
-        <ProjectIcon category={project.category} />
+        {project.thumbnail ? (
+          <Image
+            src={project.thumbnail}
+            alt={`${project.title} workflow preview`}
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <ProjectIcon category={project.category} />
+          </div>
+        )}
 
         {showFeaturedBadge && project.featured && (
           <div className="absolute top-3 right-3 rounded-full bg-purple-600/90 px-2.5 py-1 text-[10px] font-semibold text-white uppercase tracking-wider">
@@ -38,13 +48,9 @@ export function ProjectCard({ project, showFeaturedBadge = false }: ProjectCardP
           {project.description}
         </p>
 
-        {/* Technologies */}
         <div className="mt-4 flex flex-wrap gap-1.5">
           {project.technologies.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-md bg-surface-elevated px-2 py-1 text-[11px] text-text-secondary border border-border-custom"
-            >
+            <span key={tech} className="rounded-md bg-surface-elevated px-2 py-1 text-[11px] text-text-secondary border border-border-custom">
               {tech}
             </span>
           ))}
@@ -70,25 +76,8 @@ function ProjectIcon({ category }: { category: string }) {
   return (
     <div className="relative">
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect
-          x="8"
-          y="8"
-          width="48"
-          height="48"
-          rx="12"
-          stroke={color}
-          strokeWidth="1.5"
-          opacity="0.6"
-        />
-        <rect
-          x="16"
-          y="16"
-          width="32"
-          height="32"
-          rx="8"
-          fill={color}
-          opacity="0.15"
-        />
+        <rect x="8" y="8" width="48" height="48" rx="12" stroke={color} strokeWidth="1.5" opacity="0.6" />
+        <rect x="16" y="16" width="32" height="32" rx="8" fill={color} opacity="0.15" />
         <circle cx="32" cy="28" r="6" fill={color} opacity="0.4" />
         <rect x="24" y="38" width="16" height="2" rx="1" fill={color} opacity="0.3" />
         <rect x="28" y="42" width="8" height="2" rx="1" fill={color} opacity="0.2" />
