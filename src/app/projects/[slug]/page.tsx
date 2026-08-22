@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Download, Play } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { getProjectBySlug, getProjects } from "@/lib/data";
 import type { ReactNode } from "react";
