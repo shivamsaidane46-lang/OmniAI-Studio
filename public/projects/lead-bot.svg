@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">AI Lead Qualification Bot</title><desc id="desc">Minimal workflow preview showing lead intake, AI qualification and routing.</desc>
+<rect width="1200" height="675" fill="#0d0d14"/>
+<rect x="1" y="1" width="1198" height="673" rx="18" fill="none" stroke="#2a2a3a"/>
+<text x="60" y="72" fill="#f0f0f5" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="600">AI Lead Qualification</text>
+<text x="60" y="108" fill="#8888a0" font-family="Inter,Arial,sans-serif" font-size="18">Capture → Score → Route</text>
+<g font-family="Inter,Arial,sans-serif">
+<rect x="70" y="230" width="220" height="130" rx="14" fill="#15151e" stroke="#343447"/>
+<text x="105" y="278" fill="#f0f0f5" font-size="19" font-weight="600">Lead Intake</text>
+<text x="105" y="312" fill="#8888a0" font-size="15">Form / Webhook</text>
+<path d="M290 295H430" stroke="#69697f" stroke-width="2" stroke-dasharray="7 7"/>
+<path d="M420 285l12 10-12 10" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+<rect x="430" y="230" width="300" height="130" rx="14" fill="#15151e" stroke="#4a3a68"/>
+<text x="470" y="278" fill="#f0f0f5" font-size="19" font-weight="600">AI Qualification</text>
+<text x="470" y="312" fill="#8888a0" font-size="15">Score against criteria</text>
+<path d="M730 295H870" stroke="#69697f" stroke-width="2" stroke-dasharray="7 7"/>
+<path d="M860 285l12 10-12 10" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+<rect x="870" y="180" width="250" height="90" rx="14" fill="#15151e" stroke="#343447"/>
+<text x="910" y="218" fill="#f0f0f5" font-size="17" font-weight="600">Qualified</text>
+<text x="910" y="245" fill="#8888a0" font-size="14">Sales routing</text>
+<rect x="870" y="320" width="250" height="90" rx="14" fill="#15151e" stroke="#343447"/>
+<text x="910" y="358" fill="#f0f0f5" font-size="17" font-weight="600">Not Qualified</text>
+<text x="910" y="385" fill="#8888a0" font-size="14">Nurture / review</text>
+<path d="M730 295H805V225H870M805 295V365H870" fill="none" stroke="#69697f" stroke-width="2" stroke-dasharray="7 7"/>
+</g>
+<line x1="60" y1="575" x2="1140" y2="575" stroke="#20202c"/>
+<text x="60" y="615" fill="#66667a" font-family="Inter,Arial,sans-serif" font-size="15">OmniAI Studio · AI automation workflow</text>
+</svg>
