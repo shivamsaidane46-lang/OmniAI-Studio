@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Smart Email Responder</title><desc id="desc">Minimal email automation workflow showing classification, drafting and escalation.</desc>
+<rect width="1200" height="675" fill="#0d0d14"/>
+<rect x="1" y="1" width="1198" height="673" rx="18" fill="none" stroke="#2a2a3a"/>
+<text x="60" y="72" fill="#f0f0f5" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="600">Smart Email Responder</text>
+<text x="60" y="108" fill="#8888a0" font-family="Inter,Arial,sans-serif" font-size="18">Inbox → Understand → Respond</text>
+<g font-family="Inter,Arial,sans-serif">
+<rect x="70" y="235" width="220" height="125" rx="14" fill="#15151e" stroke="#343447"/>
+<text x="108" y="282" fill="#f0f0f5" font-size="19" font-weight="600">Incoming Email</text>
+<text x="108" y="315" fill="#8888a0" font-size="15">Gmail / Inbox</text>
+<path d="M290 298H430" stroke="#69697f" stroke-width="2" stroke-dasharray="7 7"/>
+<path d="M420 288l12 10-12 10" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+<rect x="430" y="235" width="300" height="125" rx="14" fill="#15151e" stroke="#4a3a68"/>
+<text x="470" y="282" fill="#f0f0f5" font-size="19" font-weight="600">AI Classification</text>
+<text x="470" y="315" fill="#8888a0" font-size="15">Intent + urgency</text>
+<path d="M730 298H870" stroke="#69697f" stroke-width="2" stroke-dasharray="7 7"/>
+<path d="M860 288l12 10-12 10" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+<rect x="870" y="180" width="250" height="100" rx="14" fill="#15151e" stroke="#343447"/>
+<text x="910" y="220" fill="#f0f0f5" font-size="18" font-weight="600">Draft Reply</text>
+<text x="910" y="249" fill="#8888a0" font-size="14">Context-aware response</text>
+<rect x="870" y="335" width="250" height="100" rx="14" fill="#15151e" stroke="#343447"/>
+<text x="910" y="375" fill="#f0f0f5" font-size="18" font-weight="600">Escalate</text>
+<text x="910" y="404" fill="#8888a0" font-size="14">Urgent / manual review</text>
+<path d="M730 298H805V230H870M805 298V385H870" fill="none" stroke="#69697f" stroke-width="2" stroke-dasharray="7 7"/>
+</g>
+<line x1="60" y1="575" x2="1140" y2="575" stroke="#20202c"/>
+<text x="60" y="615" fill="#66667a" font-family="Inter,Arial,sans-serif" font-size="15">OmniAI Studio · AI automation workflow</text>
+</svg>
