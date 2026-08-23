@@ -41,12 +41,58 @@ export const projects: Project[] = [
       "Credentials and production webhook configuration are intentionally excluded from the public JSON."
     ],
     technologies: ["n8n", "OpenRouter", "Google Sheets", "Webhooks", "PDF Parser"],
-    githubUrl: "#",
+    githubUrl: "https://github.com/shivamsaidane46-lang/OmniAI-Studio/blob/main/public/projects/ai-invoice-extractor.json",
     demoUrl: "#",
     screenshots: ["/projects/ai-invoice-extractor-workflow.svg"],
   },
   {
     id: "2",
+    title: "Lead Capture, AI Scoring & Routing Engine",
+    slug: "lead-capture-ai-scoring-routing-engine",
+    day: "Day 2 / 30",
+    description:
+      "A production-minded lead operations workflow that captures inbound leads, enriches company data, scores prospects with AI, and routes hot, medium, and cold leads automatically.",
+    category: "AI Automation",
+    featured: true,
+    thumbnail: "/projects/day-02-lead-capture-workflow.jpg",
+    heroImage: "/projects/day-02-lead-capture-workflow.jpg",
+    workflowImage: "/projects/day-02-lead-capture-workflow.jpg",
+    jsonFile: "/projects/day-02-lead-capture-ai-scoring-routing-engine.json",
+    problem:
+      "Inbound leads often arrive with incomplete context, and sales teams can waste valuable time manually researching companies, deciding which prospects matter, and deciding who should follow up. Slow or inconsistent routing can also cause high-intent opportunities to go cold.",
+    solution:
+      "This workflow captures a lead from a webhook or Gmail, enriches the company profile through web research, evaluates the lead against a configurable knowledge base, and uses an AI scoring agent to produce a 0–100 qualification score. The routing layer then separates hot, medium, and cold leads and sends each segment to the appropriate follow-up and CRM path.",
+    overview:
+      "Day 2 moves from document automation into sales automation. The architecture combines lead capture, enrichment, AI qualification, retrieval from a Pinecone-backed knowledge base, and deterministic score-based routing. High-value leads receive immediate follow-up and CRM logging, medium leads are handed to the sales team for review, and cold leads are recorded without consuming unnecessary sales capacity.",
+    workflowSteps: [
+      "Capture inbound lead data from a form webhook or Gmail trigger.",
+      "Research the submitted company URL and enrich the lead profile with public company information.",
+      "Use the AI Lead Scorer with the current qualification rules retrieved from the Pinecone knowledge base.",
+      "Generate a qualification score and route the lead by threshold: hot (75+), medium (25–74), or cold (<25).",
+      "Send the appropriate follow-up, log the lead in the CRM/Google Sheets layer, and alert the sales team when immediate action is required."
+    ],
+    keyFeatures: [
+      "Multi-source lead capture",
+      "Automatic company enrichment",
+      "AI lead scoring from 0–100",
+      "Pinecone-backed qualification knowledge base",
+      "Hot / medium / cold routing",
+      "Immediate hot-lead follow-up",
+      "CRM and Google Sheets logging",
+      "Sales team Slack notification"
+    ],
+    limitations: [
+      "Production credentials and private account connections are intentionally excluded from the public JSON.",
+      "Company enrichment quality depends on the availability and quality of public web data.",
+      "Scoring thresholds and qualification rules should be tuned to the target sales process before production use."
+    ],
+    technologies: ["n8n", "OpenRouter", "Google Gemini", "Pinecone", "Gmail", "Google Sheets", "Slack", "Google Drive", "Webhooks"],
+    githubUrl: "https://github.com/shivamsaidane46-lang/OmniAI-Studio/blob/main/public/projects/day-02-lead-capture-ai-scoring-routing-engine.json",
+    demoUrl: "#",
+    screenshots: ["/projects/day-02-lead-capture-workflow.jpg"],
+  },
+  {
+    id: "3",
     title: "AI Lead Qualification Bot",
     slug: "ai-lead-qualification-bot",
     description:
@@ -64,7 +110,7 @@ export const projects: Project[] = [
     screenshots: [],
   },
   {
-    id: "3",
+    id: "4",
     title: "Social Media Content Agent",
     slug: "social-media-content-agent",
     description:
@@ -82,7 +128,7 @@ export const projects: Project[] = [
     screenshots: [],
   },
   {
-    id: "4",
+    id: "5",
     title: "Smart Email Responder",
     slug: "smart-email-responder",
     description:
