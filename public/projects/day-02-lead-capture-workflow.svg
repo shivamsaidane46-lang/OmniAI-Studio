@@ -22,47 +22,39 @@
 <text x="50" y="92" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="800" fill="#f5f3ff">Lead Capture, AI Scoring &amp; Routing Engine</text>
 <text x="50" y="120" font-family="Inter,Arial,sans-serif" font-size="15" fill="#a1a1aa">Capture → Enrich → Score → Route → Follow Up</text>
 
-<!-- TRIGGERS -->
-<rect x="50" y="175" width="210" height="260" fill="#3b250d" stroke="#a16207" class="group" filter="url(#shadow)"/>
-<text x="75" y="210" class="groupTitle">TRIGGERS</text>
-<rect x="75" y="245" width="160" height="65" class="node"/>
-<text x="155" y="272" class="label">Webhook</text><text x="155" y="293" class="sub">lead capture</text>
-<rect x="75" y="335" width="160" height="65" class="node"/>
-<text x="155" y="362" class="label">Gmail Trigger</text><text x="155" y="383" class="sub">email intake</text>
-
 <!-- CAPTURE -->
-<rect x="300" y="175" width="250" height="260" fill="url(#red)" stroke="#b91c1c" class="group" filter="url(#shadow)"/>
-<text x="325" y="210" class="groupTitle">LEAD CAPTURE</text>
-<rect x="325" y="245" width="200" height="65" class="node"/>
-<text x="425" y="272" class="label">On Form Submission</text><text x="425" y="293" class="sub">name · email · company</text>
-<rect x="325" y="335" width="200" height="65" class="node"/>
-<text x="425" y="362" class="label">Company URL Researcher</text><text x="425" y="383" class="sub">public enrichment</text>
+<rect x="50" y="175" width="250" height="260" fill="url(#red)" stroke="#b91c1c" class="group" filter="url(#shadow)"/>
+<text x="75" y="210" class="groupTitle">LEAD CAPTURE</text>
+<rect x="75" y="245" width="200" height="65" class="node"/>
+<text x="175" y="272" class="label">On Form Submission</text><text x="175" y="293" class="sub">name · email · company</text>
+<rect x="75" y="335" width="200" height="65" class="node"/>
+<text x="175" y="362" class="label">Company URL Researcher</text><text x="175" y="383" class="sub">public enrichment</text>
 
 <!-- SCORING -->
-<rect x="590" y="175" width="300" height="260" fill="url(#green)" stroke="#16a34a" class="group" filter="url(#shadow)"/>
-<text x="615" y="210" class="groupTitle">AI SCORING</text>
-<rect x="615" y="245" width="250" height="65" class="node"/>
-<text x="740" y="272" class="label">AI Lead Scorer</text><text x="740" y="293" class="sub">score + qualification</text>
-<rect x="615" y="335" width="250" height="65" class="node"/>
-<text x="740" y="362" class="label">Route Lead by Score</text><text x="740" y="383" class="sub">hot · medium · cold</text>
+<rect x="340" y="175" width="300" height="260" fill="url(#green)" stroke="#16a34a" class="group" filter="url(#shadow)"/>
+<text x="365" y="210" class="groupTitle">AI SCORING</text>
+<rect x="365" y="245" width="250" height="65" class="node"/>
+<text x="490" y="272" class="label">AI Lead Scorer</text><text x="490" y="293" class="sub">score + qualification</text>
+<rect x="365" y="335" width="250" height="65" class="node"/>
+<text x="490" y="362" class="label">Route Lead by Score</text><text x="490" y="383" class="sub">hot · medium · cold</text>
 
 <!-- ROUTING -->
-<rect x="930" y="175" width="600" height="260" fill="#15151b" stroke="#3f3f4d" class="group" filter="url(#shadow)"/>
-<text x="955" y="210" class="groupTitle">LEAD ROUTING</text>
+<rect x="680" y="175" width="850" height="260" fill="#15151b" stroke="#3f3f4d" class="group" filter="url(#shadow)"/>
+<text x="705" y="210" class="groupTitle">LEAD ROUTING</text>
 
-<rect x="955" y="245" width="165" height="145" fill="url(#blue)" class="group"/>
-<text x="975" y="275" class="groupTitle" font-size="18">HOT · 75+</text>
-<rect x="970" y="295" width="135" height="45" class="node"/><text x="1037" y="314" class="label" font-size="13">Gmail</text><text x="1037" y="331" class="sub">follow-up</text>
-<rect x="970" y="350" width="135" height="45" class="node"/><text x="1037" y="369" class="label" font-size="13">Google Sheets</text><text x="1037" y="386" class="sub">CRM</text>
+<rect x="705" y="245" width="245" height="145" fill="url(#blue)" class="group"/>
+<text x="725" y="275" class="groupTitle" font-size="18">HOT · 75+</text>
+<rect x="720" y="295" width="100" height="45" class="node"/><text x="770" y="314" class="label" font-size="13">Gmail</text><text x="770" y="331" class="sub">follow-up</text>
+<rect x="830" y="295" width="100" height="45" class="node"/><text x="880" y="314" class="label" font-size="13">Sheets</text><text x="880" y="331" class="sub">CRM</text>
 
-<rect x="1140" y="245" width="165" height="145" fill="#25252b" class="group"/>
-<text x="1160" y="275" class="groupTitle" font-size="18">MEDIUM · 25–74</text>
-<rect x="1155" y="295" width="135" height="45" class="node"/><text x="1222" y="314" class="label" font-size="13">Gmail</text><text x="1222" y="331" class="sub">follow-up</text>
-<rect x="1155" y="350" width="135" height="45" class="node"/><text x="1222" y="369" class="label" font-size="13">Google Sheets</text><text x="1222" y="386" class="sub">CRM</text>
+<rect x="970" y="245" width="245" height="145" fill="#25252b" class="group"/>
+<text x="990" y="275" class="groupTitle" font-size="18">MEDIUM · 25–74</text>
+<rect x="985" y="295" width="100" height="45" class="node"/><text x="1035" y="314" class="label" font-size="13">Gmail</text><text x="1035" y="331" class="sub">follow-up</text>
+<rect x="1095" y="295" width="100" height="45" class="node"/><text x="1145" y="314" class="label" font-size="13">Sheets</text><text x="1145" y="331" class="sub">CRM</text>
 
-<rect x="1325" y="245" width="180" height="145" fill="#202024" class="group"/>
-<text x="1345" y="275" class="groupTitle" font-size="18">COLD · &lt;25</text>
-<rect x="1345" y="320" width="140" height="50" class="node"/><text x="1415" y="341" class="label" font-size="13">Google Sheets</text><text x="1415" y="358" class="sub">nurture / CRM</text>
+<rect x="1235" y="245" width="270" height="145" fill="#202024" class="group"/>
+<text x="1255" y="275" class="groupTitle" font-size="18">COLD · &lt;25</text>
+<rect x="1270" y="320" width="190" height="50" class="node"/><text x="1365" y="341" class="label" font-size="13">Google Sheets</text><text x="1365" y="358" class="sub">nurture / CRM</text>
 
 <!-- INFRASTRUCTURE -->
 <rect x="50" y="500" width="680" height="300" fill="url(#purple)" stroke="#7c3aed" class="group" filter="url(#shadow)"/>
@@ -85,19 +77,17 @@
 <text x="645" y="705" class="label">Text Splitter</text><text x="645" y="723" class="sub">chunks</text>
 
 <!-- CONNECTIONS -->
-<path d="M260 305H300" class="conn"/>
-<path d="M550 305H590" class="conn"/>
-<path d="M890 305H930" class="conn"/>
-<path d="M260 365H300" class="conn"/>
-<path d="M550 365H590" class="conn"/>
-<path d="M890 365H930" class="conn"/>
+<path d="M300 305H340" class="conn"/>
+<path d="M640 305H680" class="conn"/>
+<path d="M300 365H340" class="conn"/>
+<path d="M640 365H680" class="conn"/>
 <path d="M255 607H275" class="dash"/>
 <path d="M455 607H475" class="dash"/>
 <path d="M225 710H245M395 710H415M565 710H585" class="dash"/>
-<path d="M740 435V575H165" class="dash"/>
-<path d="M740 435V575H365" class="dash"/>
-<path d="M820 435V575H565" class="dash"/>
-<path d="M730 435V680H150" class="dash"/>
+<path d="M490 435V575H165" class="dash"/>
+<path d="M490 435V575H365" class="dash"/>
+<path d="M570 435V575H565" class="dash"/>
+<path d="M490 435V680H150" class="dash"/>
 
 <text x="50" y="850" font-family="Inter,Arial,sans-serif" font-size="13" fill="#71717a">Portfolio architecture view · Public diagram only · Credentials and private account bindings excluded</text>
 </svg>
