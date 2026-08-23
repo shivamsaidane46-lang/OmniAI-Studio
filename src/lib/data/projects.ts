@@ -54,9 +54,9 @@ export const projects: Project[] = [
       "A production-minded lead operations workflow that captures inbound leads, enriches company data, scores prospects with AI, and routes hot, medium, and cold leads automatically.",
     category: "AI Automation",
     featured: true,
-    thumbnail: "/projects/day-02-lead-capture-workflow.jpg",
-    heroImage: "/projects/day-02-lead-capture-workflow.jpg",
-    workflowImage: "/projects/day-02-lead-capture-workflow.jpg",
+    thumbnail: "/projects/day-02-lead-capture-workflow.svg",
+    heroImage: "/projects/day-02-lead-capture-workflow.svg",
+    workflowImage: "/projects/day-02-lead-capture-workflow.svg",
     jsonFile: "/projects/day-02-lead-capture-ai-scoring-routing-engine.json",
     problem:
       "Inbound leads often arrive with incomplete context, and sales teams can waste valuable time manually researching companies, deciding which prospects matter, and deciding who should follow up. Slow or inconsistent routing can also cause high-intent opportunities to go cold.",
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     technologies: ["n8n", "OpenRouter", "Google Gemini", "Pinecone", "Gmail", "Google Sheets", "Slack", "Google Drive", "Webhooks"],
     githubUrl: "https://github.com/shivamsaidane46-lang/OmniAI-Studio/blob/main/public/projects/day-02-lead-capture-ai-scoring-routing-engine.json",
     demoUrl: "#",
-    screenshots: ["/projects/day-02-lead-capture-workflow.jpg"],
+    screenshots: ["/projects/day-02-lead-capture-workflow.svg"],
   },
   {
     id: "3",
